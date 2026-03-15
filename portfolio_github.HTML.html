@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHYAM GUMMALA — Mechanical & Digital Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0a0c0b; --surface:#0f1210; --accent:#7ab89a; --accent2:#5e9e7e;
+  --accent3:#a8c4b0; --text:#dde8e2; --muted:#4a5c52;
+  --border:rgba(221,232,226,0.07); --glow:rgba(122,184,154,0.1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Mono',monospace;overflow-x:hidden;cursor:none}
+body::before{content:'';position:fixed;inset:0;z-index:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;opacity:0.4}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+/* CURSOR */
+#cursor{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;mix-blend-mode:difference}
+#cursor-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);position:absolute;transform:translate(-50%,-50%);transition:transform .1s}
+#cursor-ring{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--accent);position:absolute;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s;opacity:.6}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:28px 60px;transition:all .5s}
+nav.scrolled{background:rgba(10,12,11,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:30px;color:var(--text);text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-links a.active{color:var(--text)}
+.nav-cta{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--bg);background:var(--accent);border:none;padding:11px 22px;cursor:none;transition:all .3s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+.nav-cta:hover{background:var(--text)}
+
+/* HERO */
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 60px 80px;position:relative;overflow:hidden}
+.hero-bg-grid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(122,184,154,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(122,184,154,.05) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black,transparent)}
+.hero-orb{position:absolute;z-index:0;border-radius:50%;filter:blur(80px);animation:orbFloat 8s ease-in-out infinite}
+.orb-1{width:600px;height:600px;background:rgba(122,184,154,.06);top:-100px;right:-100px}
+.orb-2{width:400px;height:400px;background:rgba(94,158,126,.05);bottom:0;left:10%;animation-delay:-3s}
+.orb-3{width:300px;height:300px;background:rgba(168,196,176,.04);top:30%;right:30%;animation-delay:-5s}
+@keyframes orbFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.05)}}
+.hero-left{position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:32px;opacity:0;animation:fadeUp .8s ease .2s forwards}
+.hero-tag::before{content:'';width:40px;height:1px;background:var(--accent)}
+.hero-h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(52px,6vw,86px);line-height:.95;letter-spacing:-3px;margin-bottom:32px;opacity:0;animation:fadeUp .8s ease .4s forwards}
+.hero-h1 em{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;color:var(--accent);letter-spacing:-2px}
+.hero-h1 .outline{-webkit-text-stroke:1px rgba(221,232,226,.3);color:transparent}
+.hero-desc{font-size:14px;line-height:1.9;color:var(--muted);max-width:420px;margin-bottom:48px;opacity:0;animation:fadeUp .8s ease .6s forwards}
+.hero-actions{display:flex;align-items:center;gap:24px;opacity:0;animation:fadeUp .8s ease .8s forwards}
+.btn-primary{display:inline-flex;align-items:center;gap:12px;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:1px;color:var(--bg);background:var(--accent);text-decoration:none;padding:17px 34px;transition:all .3s;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));position:relative;overflow:hidden}
+.btn-primary::before{content:'';position:absolute;inset:0;background:var(--text);transform:translateX(-101%);transition:transform .4s}
+.btn-primary:hover::before{transform:translateX(0)}
+.btn-primary span,.btn-primary .arr{position:relative;z-index:1}
+.btn-primary:hover .arr{transform:translateX(4px)}
+.arr{transition:transform .3s}
+.btn-ghost{font-family:'DM Mono',monospace;font-size:13px;letter-spacing:1px;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color .3s}
+.btn-ghost:hover{color:var(--text)}
+.uline{height:1px;width:28px;background:currentColor;transition:width .3s}
+.btn-ghost:hover .uline{width:48px}
+
+/* CARD CAROUSEL */
+.hero-right{position:relative;z-index:1;display:flex;justify-content:center;align-items:center;opacity:0;animation:fadeIn 1.2s ease 1s forwards}
+.card-stack{position:relative;width:360px;display:flex;flex-direction:column;align-items:center;gap:20px}
+.card-carousel{position:relative;width:300px;height:380px;overflow:hidden}
+.stack-card{position:absolute;inset:0;width:100%;height:100%;border:1px solid var(--border);border-radius:4px;overflow:hidden;background:var(--surface);opacity:0;transition:opacity .45s ease,transform .45s cubic-bezier(.23,1,.32,1);pointer-events:none;will-change:transform,opacity}
+.stack-card.enter-right{transform:translateX(70px) scale(.97)}
+.stack-card.enter-left{transform:translateX(-70px) scale(.97)}
+.stack-card.active{opacity:1;transform:translateX(0) scale(1);pointer-events:auto;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.stack-card.exit-left{opacity:0;transform:translateX(-70px) scale(.97)}
+.stack-card.exit-right{opacity:0;transform:translateX(70px) scale(.97)}
+.card-inner{padding:28px;height:100%;display:flex;flex-direction:column}
+.card-lbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.card-ttl{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;line-height:1.2;margin-bottom:10px}
+.card-meta{font-size:11px;color:var(--muted)}
+.card-svg{flex:1;margin:18px -28px 0;overflow:hidden}
+.card-svg svg{width:100%;height:100%}
+/* Nav controls */
+.card-nav{display:flex;align-items:center;gap:16px}
+.card-nav-btn{background:none;border:1px solid var(--border);color:var(--muted);width:34px;height:34px;border-radius:50%;font-size:14px;cursor:none;display:flex;align-items:center;justify-content:center;transition:all .3s;line-height:1}
+.card-nav-btn:hover{border-color:var(--accent);color:var(--accent)}
+.card-dots{display:flex;gap:8px;align-items:center}
+.card-dot{width:6px;height:6px;border-radius:50%;background:var(--muted);border:none;padding:0;cursor:none;transition:all .3s}
+.card-dot.active{background:var(--accent);width:22px;border-radius:3px}
+.card-counter{font-size:11px;letter-spacing:2px;color:var(--muted);min-width:36px;text-align:right}
+/* Floating badges */
+.fbadge{position:absolute;z-index:10;background:var(--surface);border:1px solid var(--border);padding:9px 15px;border-radius:4px;font-size:11px;letter-spacing:1px;animation:badgeFloat 4s ease-in-out infinite;backdrop-filter:blur(10px)}
+.fb1{top:6px;right:-18px;color:var(--accent)}
+.fb2{bottom:54px;right:-28px;color:var(--accent3);animation-delay:-2s}
+@keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* STATS */
+.hero-stats{position:absolute;bottom:60px;left:60px;display:flex;gap:56px;opacity:0;animation:fadeUp .8s ease 1.2s forwards}
+.stat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:38px;line-height:1;color:var(--text)}
+.stat-num sup{font-size:18px;color:var(--accent)}
+.stat-lbl{font-size:11px;letter-spacing:2px;color:var(--muted);margin-top:4px}
+.scroll-ind{position:absolute;bottom:60px;right:60px;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s ease 1.5s forwards}
+.scroll-line{width:1px;height:56px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollPulse 2s ease-in-out infinite}
+.scroll-txt{font-size:10px;letter-spacing:3px;color:var(--muted);writing-mode:vertical-rl}
+@keyframes scrollPulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* MARQUEE */
+.marquee-wrap{padding:18px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;position:relative;z-index:1;background:rgba(122,184,154,.02)}
+.marquee-track{display:flex;white-space:nowrap;animation:marquee 30s linear infinite}
+.marquee-track:hover{animation-play-state:paused}
+.mq-item{display:inline-flex;align-items:center;gap:24px;padding:0 30px;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--muted)}
+.mq-item.hi{color:var(--accent)}
+.mq-dot{width:4px;height:4px;border-radius:50%;background:var(--muted);display:inline-block}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* SECTIONS SHARED */
+section{position:relative;z-index:1}
+.sec-pad{padding:110px 60px}
+.sec-hdr{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:60px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.sec-num{font-size:11px;letter-spacing:3px;color:var(--accent);margin-bottom:10px}
+.sec-ttl{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(34px,4vw,54px);letter-spacing:-2px;line-height:1}
+.sec-ttl em{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;color:var(--accent)}
+#about .sec-ttl{font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(18px,2.2vw,30px);letter-spacing:-1px;line-height:1.15}
+.sec-link{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .3s}
+.sec-link:hover{color:var(--accent)}
+.sec-link .arr{transition:transform .3s}
+.sec-link:hover .arr{transform:translateX(5px)}
+
+/* WORK */
+#work{padding:110px 60px}
+.work-grid{display:grid;gap:2px}
+.work-item{display:grid;grid-template-columns:1fr 1.4fr 1fr;align-items:center;padding:34px 0;border-bottom:1px solid var(--border);cursor:none;position:relative;overflow:hidden;transition:all .4s;text-decoration:none;color:inherit}
+.work-item::before{content:'';position:absolute;inset:0;background:var(--accent);transform:translateX(-101%);transition:transform .5s cubic-bezier(.23,1,.32,1);z-index:0}
+.work-item:hover::before{transform:translateX(0)}
+.work-item:hover{color:var(--bg)}
+.work-item>*{position:relative;z-index:1}
+.w-num{font-size:11px;color:var(--muted);transition:color .3s}
+.work-item:hover .w-num{color:rgba(10,12,11,.5)}
+.w-name{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(20px,2.4vw,34px);letter-spacing:-1px}
+.w-tags{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.w-tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:4px 11px;border:1px solid currentColor;opacity:.5;border-radius:20px}
+.w-arrow{position:absolute;right:0;top:50%;transform:translateY(-50%);width:46px;height:46px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;transition:all .4s;z-index:1}
+.work-item:hover .w-arrow{background:var(--bg);border-color:var(--bg);transform:translateY(-50%) rotate(45deg)}
+
+/* ABOUT */
+#about{padding:110px 60px;background:var(--surface)}
+.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:90px;align-items:center}
+.about-vis{position:relative}
+.about-img{position:relative;width:100%;padding-bottom:100%;overflow:hidden}
+.about-bg{position:absolute;inset:0;background:linear-gradient(135deg,rgba(122,184,154,.08),rgba(94,158,126,.04));border:1px solid var(--border)}
+.about-cells{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,1fr);gap:1px}
+.a-cell{background:rgba(122,184,154,.02);animation:cellPulse 4s ease-in-out infinite}
+.a-cell:nth-child(3n+2){animation-delay:-1.5s}
+.a-cell:nth-child(3n){animation-delay:-3s}
+@keyframes cellPulse{0%,100%{background:rgba(122,184,154,.02)}50%{background:rgba(122,184,154,.07)}}
+.about-mono{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center}
+.about-initial{font-family:'Syne',sans-serif;font-weight:800;font-size:76px;color:rgba(122,184,154,.18);line-height:1}
+.about-name-sm{font-size:11px;letter-spacing:4px;color:var(--muted);text-transform:uppercase;margin-top:4px}
+.about-vert{position:absolute;right:-38px;top:50%;transform:translateY(-50%) rotate(90deg);transform-origin:center;font-family:'Syne',sans-serif;font-weight:800;font-size:76px;color:transparent;-webkit-text-stroke:1px rgba(122,184,154,.1);white-space:nowrap;letter-spacing:10px;pointer-events:none}
+.exp-badge{position:absolute;bottom:-20px;right:-20px;background:var(--accent);color:var(--bg);padding:18px 22px;text-align:center}
+.exp-badge-num{font-family:'Syne',sans-serif;font-weight:800;font-size:38px;line-height:1}
+.exp-badge-lbl{font-size:10px;letter-spacing:1px;margin-top:2px}
+.about-intro{font-family:'Syne',sans-serif;font-weight:600;font-size:26px;line-height:1.3;letter-spacing:-.5px;margin-bottom:28px}
+.about-intro em{color:var(--accent);font-style:italic;font-family:'Playfair Display',serif;font-weight:400}
+.about-body{font-size:13px;line-height:1.9;color:var(--muted);margin-bottom:44px}
+.about-body p+p{margin-top:14px}
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.skill-row{padding:14px 0;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.skill-name{font-size:12px;color:var(--text)}
+.skill-bar{width:76px;height:2px;background:var(--border);position:relative;overflow:hidden}
+.skill-fill{position:absolute;left:0;top:0;height:100%;background:var(--accent);transform-origin:left;animation:skillGrow 1.5s ease-out forwards;transform:scaleX(0)}
+@keyframes skillGrow{to{transform:scaleX(1)}}
+
+/* EXPERIENCE */
+#experience{padding:110px 60px}
+.exp-timeline{display:flex;flex-direction:column}
+.exp-item{display:grid;grid-template-columns:200px 40px 1fr;gap:0;padding:50px 0;border-bottom:1px solid var(--border)}
+.exp-left{padding-right:20px}
+.exp-period{font-size:11px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
+.exp-company{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--text);margin-bottom:4px}
+.exp-location{font-size:11px;color:var(--muted)}
+.exp-line-col{display:flex;flex-direction:column;align-items:center;padding-top:4px}
+.exp-dot{width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 0 4px rgba(122,184,154,.15);flex-shrink:0}
+.exp-vline{width:1px;flex:1;background:var(--border);margin-top:8px}
+.exp-item:last-child .exp-vline{display:none}
+.exp-right{padding-left:32px}
+.exp-role{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.5px;margin-bottom:14px}
+.exp-desc{font-size:13px;line-height:1.9;color:var(--muted);margin-bottom:20px}
+.exp-tags{display:flex;gap:7px;flex-wrap:wrap}
+.exp-tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border:1px solid var(--border);color:var(--muted);border-radius:20px}
+
+/* DISCIPLINES */
+#services{padding:110px 60px;background:var(--surface)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:64px}
+.service-card{padding:44px 34px;border:1px solid var(--border);position:relative;overflow:hidden;transition:all .4s;cursor:none}
+.service-card::before{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.service-card:hover{border-color:rgba(122,184,154,.2);background:rgba(122,184,154,.02)}
+.service-card:hover::before{transform:scaleX(1)}
+.svc-icon{width:46px;height:46px;margin-bottom:30px;position:relative}
+.svc-ring{width:46px;height:46px;border-radius:50%;border:1px solid var(--accent);opacity:.4;position:absolute;animation:iconSpin 8s linear infinite}
+@keyframes iconSpin{to{transform:rotate(360deg)}}
+.svc-core{width:18px;height:18px;background:var(--accent);opacity:.8;position:absolute;top:14px;left:14px;clip-path:polygon(50% 0%,0% 100%,100% 100%)}
+.s2 .svc-core{clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);background:var(--accent2)}
+.s2 .svc-ring{border-color:var(--accent2)}
+.s3 .svc-core{clip-path:polygon(0 0,100% 0,100% 100%,0 100%);background:var(--accent3)}
+.s3 .svc-ring{border-color:var(--accent3)}
+.svc-num{font-size:11px;letter-spacing:3px;color:var(--muted);margin-bottom:14px}
+.svc-ttl{font-family:'Syne',sans-serif;font-weight:700;font-size:21px;margin-bottom:14px}
+.svc-desc{font-size:13px;line-height:1.8;color:var(--muted);margin-bottom:28px}
+.svc-list{list-style:none}
+.svc-list li{font-size:12px;color:var(--muted);padding:7px 0;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.svc-list li::before{content:'→';color:var(--accent);font-size:13px}
+
+/* PROCESS */
+#process{padding:110px 60px}
+.process-list{display:flex;flex-direction:column}
+.process-item{display:grid;grid-template-columns:76px 1fr 1fr;align-items:start;gap:36px;padding:46px 0;border-bottom:1px solid var(--border);cursor:none}
+.p-num-wrap{position:relative;display:flex;align-items:center;justify-content:center}
+.p-num-wrap::after{content:'';position:absolute;width:46px;height:46px;border-radius:50%;border:1px solid var(--accent);opacity:.2;transform:scale(0);transition:transform .4s}
+.process-item:hover .p-num-wrap::after{transform:scale(1)}
+.p-num{font-family:'Syne',sans-serif;font-weight:800;font-size:38px;color:var(--accent);opacity:.3;line-height:1}
+.p-ttl{font-family:'Syne',sans-serif;font-weight:700;font-size:23px;padding-top:6px}
+.p-desc{font-size:13px;line-height:1.8;color:var(--muted);padding-top:8px}
+
+/* EDUCATION */
+#education{padding:110px 60px;background:var(--surface)}
+.edu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
+.edu-card{padding:38px 34px;border:1px solid var(--border);transition:all .3s;position:relative;overflow:hidden}
+.edu-card::after{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--accent);transition:height .4s}
+.edu-card:hover::after{height:100%}
+.edu-card:hover{border-color:rgba(122,184,154,.2)}
+.edu-deg{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:6px}
+.edu-field{font-size:13px;color:var(--accent);margin-bottom:10px;letter-spacing:1px}
+.edu-inst{font-size:13px;color:var(--text);margin-bottom:6px}
+.edu-year{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+
+/* CERTIFICATIONS */
+#certifications{padding:80px 60px}
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px}
+.cert-item{padding:22px 26px;border:1px solid var(--border);display:flex;align-items:center;gap:14px;transition:border-color .3s}
+.cert-item:hover{border-color:rgba(122,184,154,.3)}
+.cert-ico{width:34px;height:34px;border-radius:50%;background:rgba(122,184,154,.1);border:1px solid rgba(122,184,154,.2);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.cert-name{font-size:12px;color:var(--text);line-height:1.4}
+
+/* TESTIMONIALS */
+#testimonials{padding:110px 0 110px 60px;overflow:hidden}
+.testi-hdr{padding-right:60px;margin-bottom:60px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.testi-track{display:flex;gap:22px;animation:scrollTrack 32s linear infinite;padding-right:60px}
+.testi-track:hover{animation-play-state:paused}
+@keyframes scrollTrack{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.t-card{flex-shrink:0;width:380px;padding:36px;border:1px solid var(--border);position:relative}
+.t-card::before{content:'"';position:absolute;top:18px;right:28px;font-family:'Playfair Display',serif;font-size:76px;color:var(--accent);opacity:.12;line-height:1}
+.t-stars{display:flex;gap:4px;margin-bottom:18px}
+.t-star{color:var(--accent);font-size:13px}
+.t-text{font-size:13px;line-height:1.8;color:var(--muted);margin-bottom:26px}
+.t-author{display:flex;align-items:center;gap:14px}
+.t-avatar{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;background:rgba(122,184,154,.1);color:var(--accent);flex-shrink:0}
+.t-name{font-family:'Syne',sans-serif;font-weight:600;font-size:13px}
+.t-role{font-size:11px;color:var(--muted);letter-spacing:1px;margin-top:2px}
+
+/* CONTACT */
+#contact{padding:110px 60px}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center}
+.contact-big{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(56px,8vw,112px);letter-spacing:-4px;line-height:.9;margin-bottom:36px}
+.contact-big em{color:var(--accent);font-style:italic;font-family:'Playfair Display',serif;font-weight:400}
+.contact-sub{font-size:14px;line-height:1.8;color:var(--muted);max-width:340px}
+.contact-email{display:flex;align-items:center;gap:14px;font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--text);text-decoration:none;margin-top:44px;padding:22px 0;border-top:1px solid var(--border);transition:color .3s;position:relative}
+.contact-email::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--accent);transition:width .5s}
+.contact-email:hover{color:var(--accent)}
+.contact-email:hover::after{width:100%}
+.contact-form{display:flex;flex-direction:column;gap:22px}
+.form-group{position:relative}
+.form-label{display:block;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.form-input,.form-textarea{width:100%;background:transparent;border:none;border-bottom:1px solid var(--border);padding:10px 0;font-family:'DM Mono',monospace;font-size:13px;color:var(--text);outline:none;transition:border-color .3s;cursor:none}
+.form-input:focus,.form-textarea:focus{border-color:var(--accent)}
+.form-textarea{resize:none;height:96px}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--muted)}
+.form-btn{display:inline-flex;align-items:center;gap:10px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1px;color:var(--bg);background:var(--accent);border:none;padding:18px 36px;cursor:none;transition:all .3s;align-self:flex-start;clip-path:polygon(0 0,calc(100% - 13px) 0,100% 13px,100% 100%,13px 100%,0 calc(100% - 13px));position:relative;overflow:hidden}
+.form-btn::before{content:'';position:absolute;inset:0;background:var(--text);transform:translateX(-101%);transition:transform .4s}
+.form-btn:hover::before{transform:translateX(0)}
+.form-btn span{position:relative;z-index:1}
+
+/* FOOTER */
+footer{padding:36px 60px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+.foot-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--text);text-decoration:none}
+.foot-logo span{color:var(--accent)}
+.foot-copy{font-size:11px;color:var(--muted)}
+.foot-socials{display:flex;gap:22px}
+.foot-social{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s}
+.foot-social:hover{color:var(--accent)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.reveal{opacity:0;transform:translateY(38px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* MOBILE */
+@media(max-width:900px){
+  nav{padding:18px 22px}
+  .nav-links{display:none}
+  #hero{grid-template-columns:1fr;padding:96px 22px 60px}
+  .hero-right,.scroll-ind{display:none}
+  .hero-stats{bottom:22px;left:22px;gap:28px}
+  #work,#about,#experience,#services,#process,#education,#certifications,#testimonials,#contact{padding:72px 22px}
+  .about-grid,.contact-wrap{grid-template-columns:1fr;gap:44px}
+  .about-vert{display:none}
+  .services-grid,.cert-grid,.edu-grid{grid-template-columns:1fr}
+  .work-item{grid-template-columns:36px 1fr}
+  .w-tags{display:none}
+  .exp-item{grid-template-columns:1fr}
+  .exp-line-col{display:none}
+  .exp-left{margin-bottom:12px}
+  footer{flex-direction:column;gap:18px;text-align:center}
+  .process-item{grid-template-columns:46px 1fr}
+  .p-desc{display:none}
+  .testi-track{padding-right:22px}
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cursor"><div id="cursor-dot"></div><div id="cursor-ring"></div></div>
+
+<!-- Nav -->
+<nav id="navbar">
+  <a href="#" class="nav-logo"> SHYAM PRASADA REDDY<span> . </span>GUMMALA </a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#services">Disciplines</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.location='mailto:gummalashyam123@gmail.com'">Connect →</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-orb orb-1"></div>
+  <div class="hero-orb orb-2"></div>
+  <div class="hero-orb orb-3"></div>
+
+  <div class="hero-left">
+    <div class="hero-tag">MIEAust · Perth, Western Australia</div>
+    <h1 class="hero-h1">
+      Mechanical<br>
+      <em>&amp; Digital</em><br>
+      <span class="outline">Engineer</span>
+    </h1>
+    <p class="hero-desc">Designing mining equipment and building the software that tracks its performance — from stacker &amp; reclaimer CAD in SolidWorks to Python &amp; AI/ML tools that digitise wear data and drive predictive maintenance.</p>
+    <div class="hero-actions">
+      <a href="#work" class="btn-primary"><span>View Projects</span><span class="arr">→</span></a>
+      <a href="#contact" class="btn-ghost"><div class="uline"></div>Get in touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="card-stack">
+      <div class="card-carousel" id="cardCarousel">
+
+        <!-- Card 1: Featured -->
+        <div class="stack-card active">
+          <div class="card-inner">
+            <div class="card-lbl">Featured</div>
+            <div class="card-ttl">Fleet Management System</div>
+            <div class="card-meta">Power BI · Python · 2024</div>
+            <div class="card-svg">
+              <svg viewBox="0 0 280 200" fill="none">
+                <rect width="280" height="200" fill="rgba(122,184,154,.03)"/>
+                <rect x="20" y="20" width="80" height="55" fill="rgba(122,184,154,.06)" rx="2"/>
+                <rect x="115" y="20" width="60" height="55" fill="rgba(94,158,126,.07)" rx="2"/>
+                <rect x="190" y="20" width="70" height="26" fill="rgba(168,196,176,.1)" rx="2"/>
+                <rect x="190" y="50" width="70" height="25" fill="rgba(122,184,154,.05)" rx="2"/>
+                <rect x="20" y="92" width="240" height="1" fill="rgba(122,184,154,.1)"/>
+                <rect x="20" y="108" width="155" height="10" fill="rgba(221,232,226,.06)" rx="2"/>
+                <rect x="20" y="126" width="115" height="8" fill="rgba(221,232,226,.04)" rx="2"/>
+                <rect x="20" y="142" width="95" height="8" fill="rgba(221,232,226,.04)" rx="2"/>
+                <circle cx="236" cy="158" r="22" fill="rgba(122,184,154,.12)" stroke="rgba(122,184,154,.25)" stroke-width="1"/>
+                <text x="236" y="163" text-anchor="middle" fill="rgba(122,184,154,.7)" font-size="11">↗</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: AI/ML -->
+        <div class="stack-card">
+          <div class="card-inner">
+            <div class="card-lbl">AI / ML</div>
+            <div class="card-ttl">Wear Data Platform</div>
+            <div class="card-meta">Python · Power Apps · 2025</div>
+            <div class="card-svg">
+              <svg viewBox="0 0 280 200" fill="none">
+                <rect width="280" height="200" fill="rgba(94,158,126,.03)"/>
+                <circle cx="80" cy="80" r="44" stroke="rgba(122,184,154,.15)" stroke-width="1" fill="none"/>
+                <circle cx="80" cy="80" r="28" stroke="rgba(122,184,154,.2)" stroke-width="1" fill="rgba(122,184,154,.04)"/>
+                <circle cx="80" cy="80" r="10" fill="rgba(122,184,154,.3)"/>
+                <line x1="140" y1="40" x2="260" y2="40" stroke="rgba(221,232,226,.06)" stroke-width="8" stroke-linecap="round"/>
+                <line x1="140" y1="62" x2="230" y2="62" stroke="rgba(221,232,226,.04)" stroke-width="8" stroke-linecap="round"/>
+                <line x1="140" y1="84" x2="250" y2="84" stroke="rgba(122,184,154,.12)" stroke-width="8" stroke-linecap="round"/>
+                <line x1="140" y1="106" x2="210" y2="106" stroke="rgba(221,232,226,.04)" stroke-width="8" stroke-linecap="round"/>
+                <rect x="20" y="140" width="240" height="1" fill="rgba(122,184,154,.1)"/>
+                <rect x="20" y="155" width="60" height="28" fill="rgba(122,184,154,.08)" rx="2"/>
+                <rect x="90" y="155" width="60" height="28" fill="rgba(94,158,126,.06)" rx="2"/>
+                <rect x="160" y="155" width="100" height="28" fill="rgba(168,196,176,.05)" rx="2"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: CAD -->
+        <div class="stack-card">
+          <div class="card-inner">
+            <div class="card-lbl">CAD / Design</div>
+            <div class="card-ttl">Stacker &amp; Reclaimer</div>
+            <div class="card-meta">SolidWorks · AutoCAD · 2024</div>
+            <div class="card-svg">
+              <svg viewBox="0 0 280 200" fill="none">
+                <rect width="280" height="200" fill="rgba(168,196,176,.02)"/>
+                <rect x="30" y="60" width="220" height="90" stroke="rgba(122,184,154,.12)" stroke-width="1" fill="rgba(122,184,154,.03)" rx="2"/>
+                <rect x="50" y="80" width="60" height="50" fill="rgba(122,184,154,.08)" rx="1"/>
+                <rect x="120" y="90" width="40" height="40" fill="rgba(94,158,126,.06)" rx="1"/>
+                <rect x="170" y="75" width="60" height="55" fill="rgba(168,196,176,.07)" rx="1"/>
+                <line x1="30" y1="60" x2="30" y2="150" stroke="rgba(122,184,154,.2)" stroke-width="1"/>
+                <line x1="30" y1="150" x2="250" y2="150" stroke="rgba(122,184,154,.2)" stroke-width="1"/>
+                <circle cx="30" cy="60" r="3" fill="rgba(122,184,154,.5)"/>
+                <circle cx="250" cy="60" r="3" fill="rgba(122,184,154,.3)"/>
+                <circle cx="250" cy="150" r="3" fill="rgba(122,184,154,.3)"/>
+                <line x1="60" y1="30" x2="220" y2="30" stroke="rgba(221,232,226,.05)" stroke-width="1" stroke-dasharray="4 4"/>
+                <line x1="140" y1="20" x2="140" y2="60" stroke="rgba(221,232,226,.05)" stroke-width="1"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="fbadge fb1">⚙ MIEAust Member</div>
+      <div class="fbadge fb2">Mining · AI/ML</div>
+
+      <!-- Navigation -->
+      <div class="card-nav">
+        <button class="card-nav-btn" id="cardPrev">←</button>
+        <div class="card-dots">
+          <button class="card-dot active" data-idx="0"></button>
+          <button class="card-dot" data-idx="1"></button>
+          <button class="card-dot" data-idx="2"></button>
+        </div>
+        <button class="card-nav-btn" id="cardNext">→</button>
+        <span class="card-counter" id="cardCounter">1 / 3</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-num">4<sup>+</sup></div><div class="stat-lbl">Yrs Industry</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-lbl">Degrees</div></div>
+    <div class="stat-item"><div class="stat-num">Mining Industry<sup></sup></div><div class="stat-lbl">RIO . BHP · HIO . Clients</div></div>
+  </div>
+  <div class="scroll-ind"><div class="scroll-line"></div><div class="scroll-txt">Scroll</div></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="mq-item hi">Mining Equipment Design</span><span class="mq-dot"></span>
+    <span class="mq-item">SolidWorks · AutoCAD</span><span class="mq-dot"></span>
+    <span class="mq-item hi">AI / ML · Python</span><span class="mq-dot"></span>
+    <span class="mq-item">Predictive Maintenance</span><span class="mq-dot"></span>
+    <span class="mq-item hi">Power BI · Power Apps</span><span class="mq-dot"></span>
+    <!--<span class="mq-item">Stackers · Reclaimers · Bucket Wheels</span><span class="mq-dot"></span>-->
+    <span class="mq-item hi">Screen Media · Mills · Scrubbers</span><span class="mq-dot"></span>
+    <span class="mq-item">Iron-Ore Mining · Perth WA</span><span class="mq-dot"></span>
+    <span class="mq-item hi">Mining Equipment Design</span><span class="mq-dot"></span>
+    <span class="mq-item">SolidWorks · AutoCAD</span><span class="mq-dot"></span>
+    <span class="mq-item hi">AI / ML · Python</span><span class="mq-dot"></span>
+    <span class="mq-item">Predictive Maintenance</span><span class="mq-dot"></span>
+    <span class="mq-item hi">Power BI · Power Apps</span><span class="mq-dot"></span>
+    <span class="mq-item">Stackers · Reclaimers · Bucket Wheels</span><span class="mq-dot"></span>
+    <span class="mq-item hi">Screen Media · Mills · Scrubbers</span><span class="mq-dot"></span>
+    <span class="mq-item">Iron-Ore Mining · Perth WA</span><span class="mq-dot"></span>
+  </div>
+</div>
+
+<!-- WORK -->
+<section id="work">
+  <div class="sec-hdr reveal">
+    <div><div class="sec-num">01 — Selected Work</div><h2 class="sec-ttl">Recent <em>Projects</em></h2></div>
+    <a href="#" class="sec-link">All projects <span class="arr">→</span></a>
+  </div>
+  <div class="work-grid">
+     <a href="#" class="work-item reveal" style="transition-delay:.20s">
+      <span class="w-num">001</span>
+      <span class="w-name">Screen Media Performance Tracker</span>
+      <div class="w-tags"><span class="w-tag">Digitizing Wear Data</span><span class="w-tag">Eahancing Wear Tracking</span><span class="w-tag">Digital Tools</span></div>
+      <div class="w-arrow">↗</div>
+    </a>
+    <a href="#" class="work-item reveal" style="transition-delay:.08s">
+      <span class="w-num">002</span>
+      <span class="w-name">Wear Data Digital Platform</span>
+      <div class="w-tags"><span class="w-tag">Python</span><span class="w-tag">AI / ML</span><span class="w-tag">Power Apps</span></div>
+      <div class="w-arrow">↗</div>
+    </a>
+    <a href="#" class="work-item reveal" style="transition-delay:.14s">
+      <span class="w-num">003</span>
+      <span class="w-name">Fleet Management System</span>
+      <div class="w-tags"><span class="w-tag">Commissioning</span><span class="w-tag">Product Support</span><span class="w-tag">Mining</span></div>
+      <div class="w-arrow">↗</div>
+    </a>
+    <a href="#" class="work-item reveal">
+      <span class="w-num">004</span>
+      <span class="w-name">Mills &amp; Scrubber Performance Tracking</span>
+      <div class="w-tags"><span class="w-tag">3D Scanning</span><span class="w-tag">Cyclone 3DR</span><span class="w-tag">Wear Forecasting</span></div>
+      <div class="w-arrow">↗</div>
+    </a>
+    <a href="#" class="work-item reveal" style="transition-delay:.26s">
+      <span class="w-num">005</span>
+      <span class="w-name">Bucket Wheel Design Review</span>
+      <div class="w-tags"><span class="w-tag">SolidWorks</span><span class="w-tag">Compliance</span><span class="w-tag">RIO</span></div>
+      <div class="w-arrow">↗</div>
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-hdr reveal"><div><div class="sec-num">02 — About Me</div><h2 class="sec-ttl">Multidisciplinary(Hybrid) <em>Engineer</em></h2></div></div>
+  <div class="about-grid">
+    <div class="about-vis reveal">
+      <div class="about-img">
+        <div class="about-bg"></div>
+        <div class="about-cells">
+          <div class="a-cell"></div><div class="a-cell"></div><div class="a-cell"></div>
+          <div class="a-cell"></div><div class="a-cell"></div><div class="a-cell"></div>
+          <div class="a-cell"></div><div class="a-cell"></div><div class="a-cell"></div>
+          <div class="a-cell"></div><div class="a-cell"></div><div class="a-cell"></div>
+        </div>
+        <!-- PHOTO: place your image at images/profile.jpg -->
+        <img src="images/profile.jpg" alt="Shyam Gummala" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;border-radius:2px;">
+      </div>
+      <div class="about-vert">SHYAMGUMMALA</div>
+      <div class="exp-badge"><div class="exp-badge-num">4+</div><div class="exp-badge-lbl">Years</div></div>
+    </div>
+    <div class="reveal" style="transition-delay:.18s">
+      <div class="about-intro">I'm a <em>mechanical engineer</em> working at the intersection of heavy industry and digital innovation.</div>
+      <div class="about-body">
+        <p>Based in Perth, Western Australia, I work in the mining sector supporting the product development, Enhancement of screen media, mills and scrubbers to improve efficiency and simultaneously developing Python and AI/ML applications on the Microsoft Power Platform to digitise wear records and enable predictive maintenance for clients including Rio Tinto and BHP.</p>
+        <p>With degrees in Mechanical Engineering, IT Networking and Project Management, and active membership in Engineers Australia (MIEAust), I bring end-to-end capability across design, compliance, data, and project delivery.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-row"><span class="skill-name">SolidWorks / AutoCAD</span><div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Python / AI / ML</span><div class="skill-bar"><div class="skill-fill" style="width:80%;animation-delay:.1s"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Power BI / Power Apps</span><div class="skill-bar"><div class="skill-fill" style="width:85%;animation-delay:.2s"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Stress Analysis</span><div class="skill-bar"><div class="skill-fill" style="width:88%;animation-delay:.3s"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Project Management</span><div class="skill-bar"><div class="skill-fill" style="width:82%;animation-delay:.4s"></div></div></div>
+        <div class="skill-row"><span class="skill-name">Mining Compliance (AS)</span><div class="skill-bar"><div class="skill-fill" style="width:87%;animation-delay:.5s"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-hdr reveal"><div><div class="sec-num">03 — Career History</div><h2 class="sec-ttl">Work <em>Experience</em></h2></div></div>
+  <div class="exp-timeline">
+
+    <div class="exp-item reveal">
+      <div class="exp-left">
+        <div class="exp-period">Oct 2024 — Present</div>
+        <div class="exp-company">Multotec Australia</div>
+        <div class="exp-location">Perth, Western Australia</div>
+      </div>
+      <div class="exp-line-col"><div class="exp-dot"></div><div class="exp-vline"></div></div>
+      <div class="exp-right">
+        <div class="exp-role">Product &amp; Digital Development Engineer</div>
+        <div class="exp-desc">Working on screen media wear issues and supporting new product developments. Inspecting mills and scrubbers to deliver clear performance insights to clients. Developing digital tools using AI/ML to digitise wear data and enhance screen media performance tracking and decision-making.</div>
+        <div class="exp-tags"><span class="exp-tag">AI / ML</span><span class="exp-tag">Python</span><span class="exp-tag">Screen Media</span><span class="exp-tag">Wear Analysis</span><span class="exp-tag">Power Apps</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal" style="transition-delay:.08s">
+      <div class="exp-left">
+        <div class="exp-period">Mar 2024 — Oct 2024</div>
+        <div class="exp-company">Haultrax</div>
+        <div class="exp-location">Perth, Western Australia</div>
+      </div>
+      <div class="exp-line-col"><div class="exp-dot"></div><div class="exp-vline"></div></div>
+      <div class="exp-right">
+        <div class="exp-role">Project Engineer</div>
+        <div class="exp-desc">Implemented Fleet Management systems in the mining industry and drove operational process improvements. Analysed performance gaps, devised sustainable improvement strategies, and managed project tasks. Supported change management activities, promoted safety awareness, and created essential project documentation.</div>
+        <div class="exp-tags"><span class="exp-tag">Fleet Management</span><span class="exp-tag">Change Management</span><span class="exp-tag">Power BI</span><span class="exp-tag">Mining Operations</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal" style="transition-delay:.14s">
+      <div class="exp-left">
+        <div class="exp-period">Jun 2023 — Mar 2024</div>
+        <div class="exp-company">FLSmidth</div>
+        <div class="exp-location">Perth, Western Australia</div>
+      </div>
+      <div class="exp-line-col"><div class="exp-dot"></div><div class="exp-vline"></div></div>
+      <div class="exp-right">
+        <div class="exp-role">Mechanical Design Engineer</div>
+        <div class="exp-desc">Conducted meticulous design reviews for stackers and reclaimers used in the mining industry, ensuring compliance with Australian safety standards. Catered to client requirements for Rio Tinto and BHP. Collaborated with design teams to implement improvements and prepared comprehensive compliance reports covering design analysis and regulatory justifications.</div>
+        <div class="exp-tags"><span class="exp-tag">SolidWorks</span><span class="exp-tag">AutoCAD</span><span class="exp-tag">Rio Tinto</span><span class="exp-tag">BHP</span><span class="exp-tag">AS Standards</span><span class="exp-tag">Design Review</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal" style="transition-delay:.20s">
+      <div class="exp-left">
+        <div class="exp-period">Mar 2021 — Aug 2022</div>
+        <div class="exp-company">Greneveld-Beka</div>
+        <div class="exp-location">Sunshine West, Victoria</div>
+      </div>
+      <div class="exp-line-col"><div class="exp-dot"></div><div class="exp-vline"></div></div>
+      <div class="exp-right">
+        <div class="exp-role">Maintenance Technician</div>
+        <div class="exp-desc">Developed and initiated maintenance projects, managed costs, and monitored performance. Collected and reviewed engineering data to assess needs, analysed project performance to identify improvement areas. Calibrated machines to maintain productivity and quality standards. Collaborated cross-functionally with engineering and production teams.</div>
+        <div class="exp-tags"><span class="exp-tag">Maintenance</span><span class="exp-tag">Machine Calibration</span><span class="exp-tag">Production</span><span class="exp-tag">Engineering Data</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal" style="transition-delay:.26s">
+      <div class="exp-left">
+        <div class="exp-period">Oct 2016 — Feb 2017</div>
+        <div class="exp-company">NTPC Limited</div>
+        <div class="exp-location">India</div>
+      </div>
+      <div class="exp-line-col"><div class="exp-dot"></div><div class="exp-vline"></div></div>
+      <div class="exp-right">
+        <div class="exp-role">Boiler Maintenance Engineer</div>
+        <div class="exp-desc">Hands-on boiler maintenance and industrial plant operations, building foundational mechanical engineering and maintenance skills in a production environment.</div>
+        <div class="exp-tags"><span class="exp-tag">Boiler Systems</span><span class="exp-tag">Plant Maintenance</span><span class="exp-tag">Industrial</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DISCIPLINES -->
+<section id="services">
+  <div class="sec-hdr reveal"><div><div class="sec-num">04 — What I Do</div><h2 class="sec-ttl">Core <em>Disciplines</em></h2></div></div>
+  <div class="services-grid">
+    <div class="service-card s2 reveal" style="transition-delay:.1s">
+      <div class="svc-icon"><div class="svc-ring"></div><div class="svc-core"></div></div>
+      <div class="svc-num">01</div>
+      <div class="svc-ttl">Digital &amp; Wear Data Tools</div>
+      <div class="svc-desc">Python and Power Platform applications that digitise wear records, enable predictive maintenance, and deliver performance insights to clients.</div>
+      <ul class="svc-list">
+        <li>Predictive Maintenance Systems</li>
+        <li>Wear Data Digitisation</li>
+        <li>Microsoft Power Apps &amp; Power BI</li>
+        <li>Python AI/ML Development</li>
+      </ul>
+    </div>
+    <div class="service-card s1 reveal">
+      <div class="svc-icon"><div class="svc-ring"></div><div class="svc-core"></div></div>
+      <div class="svc-num">02</div>
+      <div class="svc-ttl">Mechanical Design</div>
+      <div class="svc-desc">Mining equipment design from concept to compliance — stackers, reclaimers, and bucket wheels reviewed against Australian standards.</div>
+      <ul class="svc-list">
+        <li>SolidWorks &amp; AutoCAD Design</li>
+        <li>Stackers, Reclaimers &amp; Bucket Wheels</li>
+        <li>Design Reviews — Rio Tinto &amp; BHP</li>
+        <li>Australian Standards Compliance</li>
+      </ul>
+    </div>
+    <div class="service-card s3 reveal" style="transition-delay:.2s">
+      <div class="svc-icon"><div class="svc-ring"></div><div class="svc-core"></div></div>
+      <div class="svc-num">03</div>
+      <div class="svc-ttl">Project &amp; Fleet Engineering</div>
+      <div class="svc-desc">End-to-end project delivery across mining operations — fleet management, change management, safety compliance, and cross-functional coordination.</div>
+      <ul class="svc-list">
+        <li>Fleet Management Systems</li>
+        <li>Performance Gap Analysis</li>
+        <li>Change Management</li>
+        <li>Safety &amp; Compliance Documentation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="sec-hdr reveal" style="padding:0"><div><div class="sec-num">05 — How I Work</div><h2 class="sec-ttl">My <em>Approach</em></h2></div></div>
+  <div class="process-list">
+    <div class="process-item reveal">
+      <div class="p-num-wrap"><div class="p-num">01</div></div>
+      <div class="p-ttl">Inspect &amp; Assess</div>
+      <div class="p-desc">On-site inspections of mills, scrubbers and screen media — collecting real wear data and identifying failure modes before anything is designed or coded.</div>
+    </div>
+    <div class="process-item reveal" style="transition-delay:.08s">
+      <div class="p-num-wrap"><div class="p-num">02</div></div>
+      <div class="p-ttl">Design &amp; Review</div>
+      <div class="p-desc">CAD modelling in SolidWorks and AutoCAD, followed by thorough design reviews against Australian standards and client requirements — Rio Tinto, BHP and beyond.</div>
+    </div>
+    <div class="process-item reveal" style="transition-delay:.16s">
+      <div class="p-num-wrap"><div class="p-num">03</div></div>
+      <div class="p-ttl">Digitise &amp; Automate</div>
+      <div class="p-desc">Python and Power Platform tools to digitise wear records, automate reporting, and surface performance insights that drive smarter maintenance decisions.</div>
+    </div>
+    <div class="process-item reveal" style="transition-delay:.24s">
+      <div class="p-num-wrap"><div class="p-num">04</div></div>
+      <div class="p-ttl">Deliver &amp; Support</div>
+      <div class="p-desc">Clear reports, compliance documentation, and ongoing client support — every solution safe, cost-effective, and built to last in harsh mining conditions.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="sec-hdr reveal"><div><div class="sec-num">06 — Academic Background</div><h2 class="sec-ttl">Education &amp; <em>Qualifications</em></h2></div></div>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="edu-deg">Bachelor of Technology</div>
+      <div class="edu-field">Mechanical Engineering</div>
+      <div class="edu-inst">JNTUH University</div>
+      <div class="edu-year">2013 — 2017</div>
+    </div>
+    <div class="edu-card reveal" style="transition-delay:.08s">
+      <div class="edu-deg">Master's Degree</div>
+      <div class="edu-field">Information Technology</div>
+      <div class="edu-inst">Cental Queensland University</div>
+      <div class="edu-year">2018 — 2019</div>
+    </div>
+    <div class="edu-card reveal" style="transition-delay:.14s">
+      <div class="edu-deg">Graduate Certificate</div>
+      <div class="edu-field">Project Management</div>
+      <div class="edu-inst">Cental Queensland University</div>
+      <div class="edu-year">Feb 2018 — Nov 2019</div>
+    </div>
+    <div class="edu-card reveal" style="transition-delay:.20s">
+      <div class="edu-deg">Professional Year</div>
+      <div class="edu-field">Information Technology</div>
+      <div class="edu-inst">The William Light Institute</div>
+      <div class="edu-year">Mar 2021 — Feb 2022</div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="sec-hdr reveal"><div><div class="sec-num">07 — Licences &amp; Certifications</div><h2 class="sec-ttl">Certified &amp; <em>Licensed</em></h2></div></div>
+  <div class="cert-grid reveal">
+    <div class="cert-item"><div class="cert-ico">⚙</div><div class="cert-name">Autodesk AutoCAD User Certification</div></div>
+    <div class="cert-item"><div class="cert-ico">📐</div><div class="cert-name">Engineering Drawings for Manufacturing</div></div>
+    <!--<div class="cert-item"><div class="cert-ico">🚛</div><div class="cert-name">Heavy Vehicle Driver's Licence (HR-Synchromesh)</div></div>
+    <div class="cert-item"><div class="cert-ico">🦺</div><div class="cert-name">White Card — Construction Induction</div></div>
+    <div class="cert-item"><div class="cert-ico">🔧</div><div class="cert-name">Forklift Certification</div></div>-->
+    <div class="cert-item"><div class="cert-ico">🏛</div><div class="cert-name">MIEAust — Engineers Australia (Active Member)</div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testi-hdr reveal" style="display:flex;align-items:flex-end;justify-content:space-between">
+    <div><div class="sec-num">08 — What People Say</div><h2 class="sec-ttl">What <em>Colleagues</em> Say</h2></div>
+  </div>
+  <!--
+  <div class="testi-track">
+    <div class="t-card">
+      <div class="t-stars"><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span></div>
+      <p class="t-text">Shyam brings a rare combination of mechanical rigour and digital capability. His wear data platform has genuinely changed how our team tracks screen media performance across site.</p>
+      <div class="t-author"><div class="t-avatar">JM</div><div><div class="t-name">James Mitchell</div><div class="t-role">Operations Manager · Analaogics</div></div></div>
+    </div>
+    <div class="t-card">
+      <div class="t-stars"><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span></div>
+      <p class="t-text">The design reviews Shyam produced for our stacker modifications were thorough, well-documented, and fully compliant with Australian standards. Exactly the level of detail we needed.</p>
+      <div class="t-author"><div class="t-avatar">RT</div><div><div class="t-name">R. Tindall</div><div class="t-role">Senior Engineer · Rio Tinto</div></div></div>
+    </div>
+    <div class="t-card">
+      <div class="t-stars"><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span></div>
+      <p class="t-text">Shyam implemented our fleet management system with minimal disruption and maximum attention to process. His cross-functional coordination kept every stakeholder aligned throughout.</p>
+      <div class="t-author"><div class="t-avatar">KP</div><div><div class="t-name">Karen Potts</div><div class="t-role">Project Lead · Mining Operations</div></div></div>
+    </div>
+    <div class="t-card">
+      <div class="t-stars"><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span></div>
+      <p class="t-text">What sets Shyam apart is that he can walk the plant floor, identify the wear pattern, and then go build the Python tool that predicts when it will fail. That end-to-end thinking is invaluable.</p>
+      <div class="t-author"><div class="t-avatar">DL</div><div><div class="t-name">David Loh</div><div class="t-role">R&amp;D Director · Analaogics</div></div></div>
+    </div>-->
+    <!-- duplicate for seamless loop -->
+     <!--
+    <div class="t-card">
+      <div class="t-stars"><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span></div>
+      <p class="t-text">Shyam brings a rare combination of mechanical rigour and digital capability. His wear data platform has genuinely changed how our team tracks screen media performance across site.</p>
+      <div class="t-author"><div class="t-avatar">JM</div><div><div class="t-name">James Mitchell</div><div class="t-role">Operations Manager · Analaogics</div></div></div>
+    </div>
+    <div class="t-card">
+      <div class="t-stars"><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span></div>
+      <p class="t-text">The design reviews Shyam produced for our stacker modifications were thorough, well-documented, and fully compliant with Australian standards. Exactly the level of detail we needed.</p>
+      <div class="t-author"><div class="t-avatar">RT</div><div><div class="t-name">R. Tindall</div><div class="t-role">Senior Engineer · Rio Tinto</div></div></div>
+    </div>
+    <div class="t-card">
+      <div class="t-stars"><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span></div>
+      <p class="t-text">Shyam implemented our fleet management system with minimal disruption and maximum attention to process. His cross-functional coordination kept every stakeholder aligned throughout.</p>
+      <div class="t-author"><div class="t-avatar">KP</div><div><div class="t-name">Karen Potts</div><div class="t-role">Project Lead · Mining Operations</div></div></div>
+    </div>
+    <div class="t-card">
+      <div class="t-stars"><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span></div>
+      <p class="t-text">What sets Shyam apart is that he can walk the plant floor, identify the wear pattern, and then go build the Python tool that predicts when it will fail. That end-to-end thinking is invaluable.</p>
+      <div class="t-author"><div class="t-avatar">DL</div><div><div class="t-name">David Loh</div><div class="t-role">R&amp;D Director · Analaogics</div></div></div>
+    </div>
+  </div>-->
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="reveal">
+      <div class="contact-big">Let's<br><em>Work</em><br>Together</div>
+      <p class="contact-sub">Working in mining, heavy industry, or industrial IoT? Need an engineer who can design the equipment and build the tools that monitor it? Let's talk.</p>
+      <a href="/cdn-cgi/l/email-protection#3354465e5e525f52405b4a525e02010073545e525a5f1d505c5e" class="contact-email"><span class="__cf_email__" data-cfemail="047c7c7c7c7c7c446369656d682a676b69">[email&#160;protected]</span> →</a>
+    </div>
+    <div class="reveal" style="transition-delay:.18s">
+      <div class="contact-form">
+        <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" placeholder="John Smith"></div>
+        <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="john@company.com"></div>
+        <div class="form-group"><label class="form-label">Enquiry Type</label><input type="text" class="form-input" placeholder="Mining, Mechanical Design, AI/ML, Power BI..."></div>
+        <div class="form-group"><label class="form-label">Tell Me About Your Project</label><textarea class="form-textarea" placeholder="Tell me about the role or project..."></textarea></div>
+        <button class="form-btn"><span>Send Message →</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="foot-logo">SHYAM<span>.</span>GUMMALA</a>
+  <div class="foot-copy">© 2026 Shyam Gummala · MIEAust · Perth, WA</div>
+  <div class="foot-socials">
+    <a href="https://www.linkedin.com/in/shyamprasadareddy" class="foot-social" target="_blank">LinkedIn</a>
+    <a href="#" class="foot-social">GitHub</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── Custom Cursor ──
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx + 'px';
+  dot.style.top  = my + 'px';
+});
+
+(function animCursor() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animCursor);
+})();
+
+document.querySelectorAll('a,button,.work-item,.service-card,.exp-item,.edu-card,.cert-item').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    ring.style.width = '60px'; ring.style.height = '60px';
+    ring.style.borderColor = 'rgba(122,184,154,.8)';
+    dot.style.transform = 'translate(-50%,-50%) scale(0)';
+  });
+  el.addEventListener('mouseleave', () => {
+    ring.style.width = '40px'; ring.style.height = '40px';
+    ring.style.borderColor = 'rgba(122,184,154,.5)';
+    dot.style.transform = 'translate(-50%,-50%) scale(1)';
+  });
+});
+
+// ── Navbar scroll ──
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ── Scroll reveal ──
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ── Active nav links ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const secObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const a = document.querySelector('.nav-links a[href="#' + e.target.id + '"]');
+      if (a) a.classList.add('active');
+    }
+  });
+}, { threshold: 0.35 });
+sections.forEach(s => secObs.observe(s));
+
+// ── Card Carousel ──
+(function(){
+  const cards   = Array.from(document.querySelectorAll('.card-carousel .stack-card'));
+  const dots    = document.querySelectorAll('.card-dot');
+  const counter = document.getElementById('cardCounter');
+  let current   = 0;
+  let busy      = false;
+
+  // Set initial state
+  cards.forEach((c, i) => {
+    c.classList.remove('active','enter-right','enter-left','exit-left','exit-right');
+    if(i === 0) c.classList.add('active');
+    else c.classList.add('enter-right');
+  });
+
+  function goTo(next, dir){
+    if(busy || next === current) return;
+    busy = true;
+
+    const outClass = dir === 1 ? 'exit-left'  : 'exit-right';
+    const inClass  = dir === 1 ? 'enter-right' : 'enter-left';
+
+    const outCard = cards[current];
+    const inCard  = cards[next];
+
+    // Stage incoming card off-screen
+    inCard.classList.remove('active','exit-left','exit-right','enter-right','enter-left');
+    inCard.classList.add(inClass);
+
+    // Force reflow so transition fires
+    inCard.getBoundingClientRect();
+
+    // Exit current, enter next
+    outCard.classList.remove('active');
+    outCard.classList.add(outClass);
+    inCard.classList.remove(inClass);
+    inCard.classList.add('active');
+
+    // Update dots + counter
+    dots[current].classList.remove('active');
+    dots[next].classList.add('active');
+    current = next;
+    if(counter) counter.textContent = (current+1)+' / '+cards.length;
+
+    setTimeout(() => {
+      outCard.classList.remove(outClass);
+      outCard.classList.add(dir === 1 ? 'enter-right' : 'enter-left');
+      busy = false;
+    }, 480);
+  }
+
+  document.getElementById('cardNext')?.addEventListener('click', () => {
+    goTo((current + 1) % cards.length, 1);
+  });
+  document.getElementById('cardPrev')?.addEventListener('click', () => {
+    goTo((current - 1 + cards.length) % cards.length, -1);
+  });
+  dots.forEach(d => d.addEventListener('click', () => {
+    const idx = +d.dataset.idx;
+    if(idx !== current) goTo(idx, idx > current ? 1 : -1);
+  }));
+
+  // Auto-advance
+  let timer = setInterval(() => goTo((current + 1) % cards.length, 1), 4000);
+  const carousel = document.querySelector('.card-carousel');
+  carousel?.addEventListener('mouseenter', () => clearInterval(timer));
+  carousel?.addEventListener('mouseleave', () => {
+    clearInterval(timer);
+    timer = setInterval(() => goTo((current + 1) % cards.length, 1), 4000);
+  });
+})();
+
+// ── Hero orb mouse parallax ──
+document.addEventListener('mousemove', e => {
+  const x = (e.clientX / window.innerWidth  - 0.5) * 28;
+  const y = (e.clientY / window.innerHeight - 0.5) * 28;
+  const o1 = document.querySelector('.orb-1');
+  const o2 = document.querySelector('.orb-2');
+  const o3 = document.querySelector('.orb-3');
+  if (o1) o1.style.transform = `translate(${x*.5}px,${y*.5}px)`;
+  if (o2) o2.style.transform = `translate(${x*-.3}px,${y*-.3}px)`;
+  if (o3) o3.style.transform = `translate(${x*.8}px,${y*.8}px)`;
+});
+
+</script>
+</body>
+</html>
